@@ -1,0 +1,16 @@
+[Unit]
+Description=Portfolio Django Application
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/path/to/your/portfolio
+ExecStart=/path/to/your/portfolio/.venv/bin/gunicorn -c /path/to/your/portfolio/gunicorn_config.py portfolio.wsgi:application
+Restart=on-failure
+RestartSec=5
+Environment=DEBUG=False
+Environment=SECRET_KEY=your-production-secret-key-here
+
+[Install]
+WantedBy=multi-user.target 

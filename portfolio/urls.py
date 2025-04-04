@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve
+import os, re
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +27,12 @@ urlpatterns = [
     path('contact/', include('contact.urls', namespace='contact')),
 ]
 
-# Serve media files in development
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve media and static files
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Always serve static files, even in production
+urlpatterns += [
+    path('static/<path:path>', serve, {
+        'document_root': settings.STATIC_ROOT,
+    }),
+]

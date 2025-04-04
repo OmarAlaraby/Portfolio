@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add animation class to elements when they come into view
     function fadeInOnScroll() {
         const sections = document.querySelectorAll('section');
-        
         sections.forEach(section => {
             const sectionTop = section.getBoundingClientRect().top;
             const windowHeight = window.innerHeight;
@@ -54,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof particlesJS !== 'undefined') {
         particlesJS('particles-js', {
             particles: {
-                number: { value: 200, density: { enable: true, value_area: 800 } },
+                number: { value: 80, density: { enable: true, value_area: 800 } },
                 color: { value: '#ffffff' },
                 shape: {
                     type: 'circle',

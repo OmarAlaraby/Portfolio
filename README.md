@@ -44,6 +44,7 @@ A personal portfolio website built with Django to showcase projects, skills, and
 
 - Python 3.8+
 - Gunicorn
+- Whitenoise (for static files serving)
 - PostgreSQL (recommended for production)
 
 ### Deployment Steps
@@ -65,10 +66,12 @@ A personal portfolio website built with Django to showcase projects, skills, and
    pip install -r requirements.txt
    ```
 
-4. Configure production settings:
-   - Update `portfolio/settings_prod.py` with your domain and email settings
-   - Set `SECRET_KEY` in an environment variable
-   - Configure database settings if using PostgreSQL
+4. Configure environment variables:
+   - Add the following to your server environment or to a `.env` file:
+     ```
+     DEBUG=False
+     SECRET_KEY=your-secure-secret-key-here
+     ```
 
 5. Set up SSL (if needed):
    - You can use a reverse proxy or configure Gunicorn directly with SSL
@@ -99,15 +102,21 @@ To start the application in production mode using Gunicorn:
 
 1. Make the script executable:
    ```
-   chmod +x start_production.sh
+   chmod +x start.sh
    ```
 
-2. Run the script:
+2. Update the SECRET_KEY in the script:
    ```
-   ./start_production.sh
+   # Edit start.sh and update this line:
+   export SECRET_KEY="your-production-secret-key-here"
    ```
 
-This will collect static files, apply migrations, and start Gunicorn with the production settings.
+3. Run the script:
+   ```
+   ./start.sh
+   ```
+
+This will collect static files, apply migrations, and start Gunicorn with production settings.
 
 ## Maintenance
 
@@ -127,34 +136,35 @@ This will collect static files, apply migrations, and start Gunicorn with the pr
 
 ## Handling Static Files in Production
 
-For proper static file handling in production (including admin static files):
+This project uses Whitenoise to serve static files efficiently in production:
 
-1. Make sure your `portfolio/settings_prod.py` has the correct static file settings:
+1. Static files configuration (already set in `portfolio/settings.py`):
    ```python
    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
    STATIC_URL = '/static/'
-   STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
    STATICFILES_DIRS = [
        os.path.join(BASE_DIR, 'static'),
    ]
+   
+   # In production (DEBUG=False), Whitenoise is used:
+   if not DEBUG:
+       STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
    ```
 
 2. Collect static files before starting the server:
    ```
-   # Run with production settings
-   export DJANGO_SETTINGS_MODULE=portfolio.settings_prod
+   # Set environment variable for production
+   export DEBUG=False
+   
+   # Collect static files
    python manage.py collectstatic --noinput --clear
    ```
    
    Or use the provided script:
    ```
-   ./collect_static.sh
+   ./start.sh
    ```
 
-3. For static file serving in production, you have several options:
-   - Configure Gunicorn to serve static files directly
-   - Use a CDN service
-   - Use Django's built-in static file serving for small projects (not recommended for high-traffic sites)
-   - Use whitenoise package for more efficient static file serving in Django
+3. Whitenoise will automatically serve static files via Django's middleware.
 
 If you're having issues with static files, check the application logs for specific errors.

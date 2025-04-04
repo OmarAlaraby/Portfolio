@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -130,8 +131,10 @@ STATICFILES_DIRS = [
 ]
 
 if not DEBUG:
-    # Use more efficient static file storage in production
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+    # Use whitenoise for static files in production
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    # Allow whitenoise to serve media files
+    WHITENOISE_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Media files (User uploaded)
 MEDIA_URL = '/media/'

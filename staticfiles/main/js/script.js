@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add animation class to elements when they come into view
     function fadeInOnScroll() {
         const sections = document.querySelectorAll('section');
+        
         sections.forEach(section => {
             const sectionTop = section.getBoundingClientRect().top;
             const windowHeight = window.innerHeight;
@@ -61,12 +62,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     polygon: { nb_sides: 5 }
                 },
                 opacity: {
-                    value: .7,
+                    value: .5,
                     random: true,
                     anim: { enable: false }
                 },
                 size: {
-                    value: 3,
+                    value: 2,
                     random: true,
                     anim: { enable: false }
                 },

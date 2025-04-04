@@ -27,12 +27,21 @@ urlpatterns = [
     path('contact/', include('contact.urls', namespace='contact')),
 ]
 
-# Serve media and static files
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve media files
+urlpatterns += [
+    path('media/<path:path>', serve, {
+        'document_root': settings.MEDIA_ROOT,
+    }),
+]
 
-# Always serve static files, even in production
+# Serve static files
 urlpatterns += [
     path('static/<path:path>', serve, {
         'document_root': settings.STATIC_ROOT,
     }),
 ]
+
+# For development only - this is more efficient but not needed with the above settings
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

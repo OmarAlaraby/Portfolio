@@ -6,8 +6,11 @@ set -e
 export DEBUG=False
 export SECRET_KEY="your-production-secret-key-here"
 
-# Make sure static files directory exists
+# Make sure directories exist with proper permissions
 mkdir -p staticfiles
+mkdir -p media
+chmod -R 755 staticfiles
+chmod -R 755 media
 
 # Activate virtual environment if it exists
 if [ -d ".venv" ]; then

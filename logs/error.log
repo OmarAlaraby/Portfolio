@@ -1,0 +1,62 @@
+[2025-04-04 18:47:22 +0000] [66470] [INFO] Starting gunicorn 23.0.0
+[2025-04-04 18:47:22 +0000] [66470] [INFO] Listening at: http://0.0.0.0:8000 (66470)
+[2025-04-04 18:47:22 +0000] [66470] [INFO] Using worker: gthread
+[2025-04-04 18:47:22 +0000] [66472] [INFO] Booting worker with pid: 66472
+[2025-04-04 18:47:22 +0000] [66473] [INFO] Booting worker with pid: 66473
+[2025-04-04 18:47:22 +0000] [66475] [INFO] Booting worker with pid: 66475
+[2025-04-04 18:47:22 +0000] [66476] [INFO] Booting worker with pid: 66476
+[2025-04-04 18:47:22 +0000] [66477] [INFO] Booting worker with pid: 66477
+[2025-04-04 18:47:22 +0000] [66478] [INFO] Booting worker with pid: 66478
+[2025-04-04 18:47:22 +0000] [66479] [INFO] Booting worker with pid: 66479
+[2025-04-04 18:47:22 +0000] [66480] [INFO] Booting worker with pid: 66480
+[2025-04-04 18:47:22 +0000] [66481] [INFO] Booting worker with pid: 66481
+[2025-04-04 18:47:22 +0000] [66482] [INFO] Booting worker with pid: 66482
+[2025-04-04 18:47:22 +0000] [66483] [INFO] Booting worker with pid: 66483
+[2025-04-04 18:47:22 +0000] [66484] [INFO] Booting worker with pid: 66484
+[2025-04-04 18:47:22 +0000] [66485] [INFO] Booting worker with pid: 66485
+[2025-04-04 18:47:22 +0000] [66486] [INFO] Booting worker with pid: 66486
+[2025-04-04 18:47:22 +0000] [66487] [INFO] Booting worker with pid: 66487
+[2025-04-04 18:47:22 +0000] [66488] [INFO] Booting worker with pid: 66488
+[2025-04-04 18:47:22 +0000] [66489] [INFO] Booting worker with pid: 66489
+[2025-04-04 18:47:23 +0000] [66490] [INFO] Booting worker with pid: 66490
+[2025-04-04 18:47:23 +0000] [66491] [INFO] Booting worker with pid: 66491
+[2025-04-04 18:47:23 +0000] [66492] [INFO] Booting worker with pid: 66492
+[2025-04-04 18:47:23 +0000] [66493] [INFO] Booting worker with pid: 66493
+[2025-04-04 18:47:23 +0000] [66494] [INFO] Booting worker with pid: 66494
+[2025-04-04 18:47:23 +0000] [66495] [INFO] Booting worker with pid: 66495
+[2025-04-04 18:47:23 +0000] [66496] [INFO] Booting worker with pid: 66496
+[2025-04-04 18:47:23 +0000] [66497] [INFO] Booting worker with pid: 66497
+[2025-04-04 18:47:23 +0000] [66470] [INFO] Handling signal: winch
+[2025-04-04 18:47:23 +0000] [66470] [INFO] Handling signal: winch
+[2025-04-04 18:47:23 +0000] [66470] [INFO] Handling signal: winch
+[2025-04-04 18:47:23 +0000] [66470] [INFO] Handling signal: winch
+[2025-04-04 18:47:23 +0000] [66470] [INFO] Handling signal: winch
+[2025-04-04 18:48:56 +0000] [66470] [INFO] Handling signal: int
+[2025-04-04 18:48:57 +0000] [66488] [INFO] Worker exiting (pid: 66488)
+[2025-04-04 18:48:57 +0000] [66481] [INFO] Worker exiting (pid: 66481)
+[2025-04-04 18:48:57 +0000] [66489] [INFO] Worker exiting (pid: 66489)
+[2025-04-04 18:48:57 +0000] [66472] [INFO] Worker exiting (pid: 66472)
+[2025-04-04 18:48:57 +0000] [66485] [INFO] Worker exiting (pid: 66485)
+[2025-04-04 18:48:57 +0000] [66483] [INFO] Worker exiting (pid: 66483)
+[2025-04-04 18:48:57 +0000] [66473] [INFO] Worker exiting (pid: 66473)
+[2025-04-04 18:48:57 +0000] [66487] [INFO] Worker exiting (pid: 66487)
+[2025-04-04 18:48:57 +0000] [66479] [INFO] Worker exiting (pid: 66479)
+[2025-04-04 18:48:57 +0000] [66475] [INFO] Worker exiting (pid: 66475)
+[2025-04-04 18:48:57 +0000] [66476] [INFO] Worker exiting (pid: 66476)
+[2025-04-04 18:48:57 +0000] [66477] [INFO] Worker exiting (pid: 66477)
+[2025-04-04 18:48:57 +0000] [66486] [INFO] Worker exiting (pid: 66486)
+[2025-04-04 18:48:57 +0000] [66480] [INFO] Worker exiting (pid: 66480)
+[2025-04-04 18:48:57 +0000] [66492] [INFO] Worker exiting (pid: 66492)
+[2025-04-04 18:48:57 +0000] [66495] [INFO] Worker exiting (pid: 66495)
+[2025-04-04 18:48:57 +0000] [66478] [INFO] Worker exiting (pid: 66478)
+[2025-04-04 18:48:57 +0000] [66490] [INFO] Worker exiting (pid: 66490)
+[2025-04-04 18:48:57 +0000] [66482] [INFO] Worker exiting (pid: 66482)
+[2025-04-04 18:48:57 +0000] [66493] [INFO] Worker exiting (pid: 66493)
+[2025-04-04 18:48:57 +0000] [66497] [INFO] Worker exiting (pid: 66497)
+[2025-04-04 18:48:57 +0000] [66496] [INFO] Worker exiting (pid: 66496)
+[2025-04-04 18:48:57 +0000] [66491] [INFO] Worker exiting (pid: 66491)
+[2025-04-04 18:48:57 +0000] [66494] [INFO] Worker exiting (pid: 66494)
+[2025-04-04 18:48:57 +0000] [66484] [INFO] Worker exiting (pid: 66484)
+[2025-04-04 18:49:05 +0000] [66470] [ERROR] Worker (pid:66497) was sent SIGHUP!
+[2025-04-04 18:49:05 +0000] [66470] [ERROR] Worker (pid:66496) was sent SIGHUP!
+[2025-04-04 18:49:06 +0000] [66470] [INFO] Shutting down: Master

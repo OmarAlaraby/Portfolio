@@ -261,6 +261,12 @@ body {
     -webkit-text-fill-color: transparent;
     display: inline-block;
     padding: 0.5rem 0;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.section-title.visible {
+    opacity: 1;
 }
 
 .section-title::after {

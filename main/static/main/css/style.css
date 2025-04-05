@@ -256,11 +256,15 @@ body {
     text-align: center;
     margin-bottom: 2.5rem;
     position: relative;
-    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--accent-color);
     display: inline-block;
     padding: 0.5rem 0;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.section-title.visible {
+    opacity: 1;
 }
 
 .section-title::after {

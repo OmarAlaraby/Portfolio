@@ -2,23 +2,32 @@
 
 A personal portfolio website built with Django to showcase projects, skills, and resume.
 
-## Development Setup
+View the live portfolio: [omar-alaraby-portfolio.onrender.com](https://omar-alaraby-portfolio.onrender.com)
+
+## Development Setup with Poetry
 
 1. Clone the repository:
    ```
-   git clone <repository-url>
+   git clone https://github.com/OmarAlaraby/Portfolio.git
    cd Portfolio
    ```
 
-2. Create and activate a virtual environment:
+2. Install Poetry (if not already installed):
    ```
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   # On Linux/macOS
+   curl -sSL https://install.python-poetry.org | python3 -
+
+   # On Windows (PowerShell)
+   (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
    ```
 
-3. Install dependencies:
+3. Set up the Poetry environment and install dependencies:
    ```
-   pip install -r requirements.txt
+   # Install dependencies from pyproject.toml
+   poetry install
+
+   # Activate the Poetry virtual environment
+   poetry shell
    ```
 
 4. Run migrations:
@@ -43,6 +52,7 @@ A personal portfolio website built with Django to showcase projects, skills, and
 ### Server Requirements
 
 - Python 3.8+
+- Poetry
 - Gunicorn
 - Whitenoise (for static files serving)
 - PostgreSQL (recommended for production)
@@ -51,39 +61,40 @@ A personal portfolio website built with Django to showcase projects, skills, and
 
 1. Clone the repository on your server:
    ```
-   git clone <repository-url>
+   git clone https://github.com/OmarAlaraby/Portfolio.git
    cd Portfolio
    ```
 
-2. Create and activate a virtual environment:
+2. Install Poetry and set up the environment:
    ```
-   python -m venv .venv
-   source .venv/bin/activate
+   # Install Poetry
+   curl -sSL https://install.python-poetry.org | python3 -
+
+   # Install dependencies
+   poetry install --no-dev
+
+   # Activate the Poetry environment
+   poetry shell
    ```
 
-3. Install dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-
-4. Configure environment variables:
+3. Configure environment variables:
    - Add the following to your server environment or to a `.env` file:
      ```
      DEBUG=False
      SECRET_KEY=your-secure-secret-key-here
      ```
 
-5. Set up SSL (if needed):
+4. Set up SSL (if needed):
    - You can use a reverse proxy or configure Gunicorn directly with SSL
    - For development testing with HTTPS, install django-sslserver:
      ```
-     pip install django-sslserver
+     poetry add django-sslserver
      ```
      Then run: `python manage.py runsslserver`
 
-6. Set up the systemd service:
+5. Set up the systemd service:
    - Copy `portfolio.service` to `/etc/systemd/system/`
-   - Update paths to match your server
+   - Update paths to match your server and Poetry environment
    - Enable and start the service:
      ```
      sudo systemctl daemon-reload
@@ -91,7 +102,7 @@ A personal portfolio website built with Django to showcase projects, skills, and
      sudo systemctl start portfolio
      ```
 
-7. Monitor the application logs:
+6. Monitor the application logs:
    ```
    sudo journalctl -u portfolio.service
    ```
@@ -111,9 +122,9 @@ To start the application in production mode using Gunicorn:
    export SECRET_KEY="your-production-secret-key-here"
    ```
 
-3. Run the script:
+3. Run the script through Poetry:
    ```
-   ./start.sh
+   poetry run ./start.sh
    ```
 
 This will collect static files, apply migrations, and start Gunicorn with production settings.
@@ -123,16 +134,36 @@ This will collect static files, apply migrations, and start Gunicorn with produc
 - Updating the application:
   ```
   git pull
-  source .venv/bin/activate
-  pip install -r requirements.txt
-  python manage.py migrate
+  poetry install
+  poetry run python manage.py migrate
   sudo systemctl restart portfolio
+  ```
+
+- Adding new dependencies:
+  ```
+  poetry add package-name
   ```
 
 - Backing up the database:
   ```
-  python manage.py dumpdata > backup.json
+  poetry run python manage.py dumpdata > backup.json
   ```
+
+## Understanding the Poetry Setup
+
+This project uses Poetry for dependency management. Key files:
+
+- `pyproject.toml`: Defines project metadata and dependencies
+- `poetry.lock`: Ensures reproducible installations with exact package versions
+
+Common Poetry commands:
+```
+poetry add package-name        # Add a new dependency
+poetry remove package-name     # Remove a dependency
+poetry update                  # Update all dependencies
+poetry show                    # List all packages
+poetry export -f requirements.txt > requirements.txt  # Export to requirements.txt
+```
 
 ## Handling Static Files in Production
 
@@ -156,13 +187,13 @@ This project uses Whitenoise to serve static files efficiently in production:
    # Set environment variable for production
    export DEBUG=False
    
-   # Collect static files
-   python manage.py collectstatic --noinput --clear
+   # Collect static files with Poetry
+   poetry run python manage.py collectstatic --noinput --clear
    ```
    
    Or use the provided script:
    ```
-   ./start.sh
+   poetry run ./start.sh
    ```
 
 3. Whitenoise will automatically serve static files via Django's middleware.

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import socket
 
 # Load environment variables from .env file if it exists
 load_dotenv()
@@ -144,6 +145,10 @@ if not DEBUG:
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Email configuration
+# Check if running on localhost/development environment
+IS_LOCAL = socket.gethostname() == 'Omar-Alaraby' or '127.0.0.1' in socket.gethostbyname_ex(socket.gethostname())[2]
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
@@ -151,10 +156,6 @@ EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-
-# Default email addresses
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@omar-alaraby-portfolio.onrender.com')
-CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL', 'omar.alaraby23@gmail.com')
 
 # Logging - only in production
 if not DEBUG:

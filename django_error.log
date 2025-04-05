@@ -52,3 +52,58 @@ Traceback (most recent call last):
     raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
 django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
 "GET / HTTP/1.1" 500 145
+Email sending error: Unable to locate credentials
+Traceback (most recent call last):
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/contact/views.py", line 54, in save_contact_message
+    email.send(fail_silently=False)
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/core/mail/message.py", line 307, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django_ses/__init__.py", line 174, in send_messages
+    self._update_throttling()
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django_ses/__init__.py", line 225, in _update_throttling
+    rate_limit = self.get_rate_limit()
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django_ses/__init__.py", line 320, in get_rate_limit
+    return self._get_v2_send_quota() if self._use_ses_v2 else self._get_v1_send_quota()
+                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django_ses/__init__.py", line 338, in _get_v1_send_quota
+    quota_dict = self.connection.get_send_quota()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/client.py", line 570, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/context.py", line 124, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/client.py", line 1013, in _make_api_call
+    http, parsed_response = self._make_request(
+                            ^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/client.py", line 1037, in _make_request
+    return self._endpoint.make_request(operation_model, request_dict)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/endpoint.py", line 119, in make_request
+    return self._send_request(request_dict, operation_model)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/endpoint.py", line 196, in _send_request
+    request = self.create_request(request_dict, operation_model)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/endpoint.py", line 132, in create_request
+    self._event_emitter.emit(
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/hooks.py", line 412, in emit
+    return self._emitter.emit(aliased_event_name, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/hooks.py", line 256, in emit
+    return self._emit(event_name, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/hooks.py", line 239, in _emit
+    response = handler(**kwargs)
+               ^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/signers.py", line 106, in handler
+    return self.sign(operation_name, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/signers.py", line 198, in sign
+    auth.add_auth(request)
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/auth.py", line 424, in add_auth
+    raise NoCredentialsError()
+botocore.exceptions.NoCredentialsError: Unable to locate credentials

@@ -256,7 +256,9 @@ body {
     text-align: center;
     margin-bottom: 2.5rem;
     position: relative;
-    color: var(--accent-color);
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     display: inline-block;
     padding: 0.5rem 0;
     opacity: 1 !important;

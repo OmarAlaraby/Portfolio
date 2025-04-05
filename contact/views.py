@@ -23,34 +23,31 @@ def save_contact_message(request):
             
             # Send email notification
             try:
-                subject = f"New Contact Form Submission: {contact_message.subject}"
+                subject = f"Contact from your portfolio website: {contact_message.subject}"
                 
                 # Create message content
                 message = f"""
                 You have received a new message from your portfolio website:
                 
                 Name: {contact_message.name}
-                Email: {contact_message.email}
-                Subject: {contact_message.subject}
                 
                 Message:
                 {contact_message.message}
                 
-                Date: {contact_message.date_sent}
+                Date: {contact_message.date_sent.strftime("%B %d, %Y at %I:%M %p")}
                 """
                 
                 # Send the email
                 send_mail(
                     subject=subject,
                     message=message,
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[settings.CONTACT_EMAIL],
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=[settings.EMAIL_HOST_USER],
                     fail_silently=False,
                 )
                 
                 messages.success(request, 'Your message has been sent successfully!')
             except Exception as e:
-                # Log the error but don't show technical details to the user
                 print(f"Email sending error: {e}")
                 messages.success(request, 'Your message has been saved, but there was a problem sending the email notification.')
                 

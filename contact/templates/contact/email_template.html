@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Contact Form Submission</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .email-container {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .email-header {
+            background-color: #121212;
+            color: #00ff9d;
+            padding: 20px;
+            text-align: center;
+        }
+        .email-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .email-body {
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .email-field {
+            margin-bottom: 15px;
+        }
+        .email-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
+        }
+        .email-value {
+            background-color: white;
+            padding: 12px;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+        }
+        .email-message {
+            white-space: pre-line;
+        }
+        .email-footer {
+            background-color: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            font-size: 13px;
+            color: #777;
+        }
+        .highlight {
+            color: #00cc7d;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <h1>New Contact Message</h1>
+        </div>
+        <div class="email-body">
+            <div class="email-field">
+                <div class="email-label">FROM</div>
+                <div class="email-value">{{ name }}</div>
+            </div>
+            
+            <div class="email-field">
+                <div class="email-label">EMAIL</div>
+                <div class="email-value">{{ email }}</div>
+            </div>
+            
+            <div class="email-field">
+                <div class="email-label">SUBJECT</div>
+                <div class="email-value">{{ subject }}</div>
+            </div>
+            
+            <div class="email-field">
+                <div class="email-label">MESSAGE</div>
+                <div class="email-value email-message">{{ message }}</div>
+            </div>
+            
+            <div class="email-field">
+                <div class="email-label">DATE</div>
+                <div class="email-value">{{ date }}</div>
+            </div>
+        </div>
+        <div class="email-footer">
+            This message was sent from your <span class="highlight">Portfolio Website</span> contact form.
+        </div>
+    </div>
+</body>
+</html> 

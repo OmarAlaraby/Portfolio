@@ -407,33 +407,14 @@ document.addEventListener('DOMContentLoaded', function() {
         animateParticles();
     }
     
-    // Enhance section title reveal animations
+    // Enhance section title reveal animations - simplified and fixed
     function enhanceSectionTitles() {
+        // Instead of manipulating the DOM structure which caused issues,
+        // simply add a class to section titles for styling
         const titles = document.querySelectorAll('.section-title');
         
         titles.forEach(title => {
-            // Don't apply animation if it's already been processed
-            if (title.querySelector('.title-text-wrapper')) return;
-            
-            // Create a wrapper for the text
-            const wrapper = document.createElement('span');
-            wrapper.classList.add('title-text-wrapper');
-            wrapper.style.display = 'block';
-            wrapper.style.overflow = 'hidden';
-            
-            // Move the title text inside the wrapper
-            const titleText = title.textContent;
-            title.textContent = '';
-            wrapper.innerHTML = `<span class="title-text">${titleText}</span>`;
-            title.appendChild(wrapper);
-            
-            // Style the inner text - start with opacity 1 to prevent hiding
-            const innerText = wrapper.querySelector('.title-text');
-            innerText.style.display = 'block';
-            innerText.style.transform = 'translateY(0)';
-            innerText.style.opacity = '1';
-            innerText.style.transition = 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease';
-            innerText.classList.add('revealed');
+            title.classList.add('visible');
         });
     }
     

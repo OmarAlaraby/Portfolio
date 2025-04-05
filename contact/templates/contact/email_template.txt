@@ -1,0 +1,14 @@
+NEW CONTACT MESSAGE FROM YOUR PORTFOLIO WEBSITE
+--------------------------------------------------
+
+FROM: {{ name }}
+EMAIL: {{ email }}
+SUBJECT: {{ subject }}
+
+MESSAGE:
+{{ message }}
+
+DATE: {{ date }}
+
+--------------------------------------------------
+This message was sent from your Portfolio Website contact form. 

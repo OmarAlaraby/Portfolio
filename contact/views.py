@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.template.loader import render_to_string
 from .models import ContactInfo, ContactMessage
@@ -21,35 +21,41 @@ def save_contact_message(request):
             # Save form data to the database
             contact_message = form.save()
             
-            # Send email notification
+            # Prepare email notification
             try:
-                subject = f"Contact from your portfolio website: {contact_message.subject}"
+                subject = f"New Contact: {contact_message.subject}"
                 
-                # Create message content
-                message = f"""
-                You have received a new message from your portfolio website:
+                # Prepare email context
+                context = {
+                    'name': contact_message.name,
+                    'email': contact_message.email,
+                    'subject': contact_message.subject,
+                    'message': contact_message.message,
+                    'date': contact_message.date_sent.strftime("%B %d, %Y at %I:%M %p")
+                }
                 
-                Name: {contact_message.name}
+                # Render email templates
+                text_content = render_to_string('contact/email_template.txt', context)
+                html_content = render_to_string('contact/email_template.html', context)
                 
-                Message:
-                {contact_message.message}
-                
-                Date: {contact_message.date_sent.strftime("%B %d, %Y at %I:%M %p")}
-                """
-                
-                # Send the email
-                send_mail(
+                # Create email message
+                email = EmailMultiAlternatives(
                     subject=subject,
-                    message=message,
-                    from_email=settings.EMAIL_HOST_USER,
-                    recipient_list=[settings.EMAIL_HOST_USER],
-                    fail_silently=False,
+                    body=text_content,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    to=[settings.CONTACT_EMAIL],
                 )
+                
+                # Attach HTML version
+                email.attach_alternative(html_content, "text/html")
+                
+                # Send email
+                email.send()
                 
                 messages.success(request, 'Your message has been sent successfully!')
             except Exception as e:
                 print(f"Email sending error: {e}")
-                messages.success(request, 'Your message has been saved, but there was a problem sending the email notification.')
+                messages.error(request, 'Your message has been saved, but there was a problem sending the email notification. Please try again later.')
                 
             return redirect('index')
         else:

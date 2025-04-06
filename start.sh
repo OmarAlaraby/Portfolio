@@ -1,5 +1,3 @@
-#!/bin/bash
-
 set -e
 
 # Set environment variables for production
@@ -11,9 +9,10 @@ mkdir -p media
 chmod -R 755 staticfiles
 chmod -R 755 media
 
-# Activate virtual environment if it exists
-if [ -d ".venv" ]; then
-    poetry shell
+# Install dependencies (replace poetry with pip if needed)
+if [ -f "pyproject.toml" ]; then
+    pip install poetry
+    poetry install --no-interaction --no-ansi
 fi
 
 # Collect static files
@@ -26,4 +25,4 @@ python manage.py migrate
 
 # Start Gunicorn
 echo "Starting Gunicorn server..."
-gunicorn --workers=3 portfolio.wsgi:application 
+gunicorn --workers=3 portfolio.wsgi:application --bind 0.0.0.0:$PORT

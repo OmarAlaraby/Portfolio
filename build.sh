@@ -13,3 +13,4 @@ poetry lock --no-update
 poetry install --no-interaction --no-ansi
 
 echo "Build completed successfully"
+

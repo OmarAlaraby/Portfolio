@@ -4,7 +4,6 @@ set -e
 
 # Set environment variables for production
 export DEBUG=False
-export SECRET_KEY="your-production-secret-key-here"
 
 # Make sure directories exist with proper permissions
 mkdir -p staticfiles
@@ -14,7 +13,7 @@ chmod -R 755 media
 
 # Activate virtual environment if it exists
 if [ -d ".venv" ]; then
-    source .venv/bin/activate
+    poetry shell
 fi
 
 # Collect static files

@@ -1,0 +1,176 @@
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/utils/deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/messages/storage/fallback.py", line 17, in __init__
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/messages/storage/cookie.py", line 92, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/core/signing.py", line 112, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+                           ^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/conf/__init__.py", line 90, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+"GET / HTTP/1.1" 500 145
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/utils/deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/messages/storage/fallback.py", line 17, in __init__
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/messages/storage/cookie.py", line 92, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/core/signing.py", line 112, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+                           ^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/conf/__init__.py", line 90, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+"GET / HTTP/1.1" 500 145
+Email sending error: Unable to locate credentials
+Traceback (most recent call last):
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/contact/views.py", line 54, in save_contact_message
+    email.send(fail_silently=False)
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/core/mail/message.py", line 307, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django_ses/__init__.py", line 174, in send_messages
+    self._update_throttling()
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django_ses/__init__.py", line 225, in _update_throttling
+    rate_limit = self.get_rate_limit()
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django_ses/__init__.py", line 320, in get_rate_limit
+    return self._get_v2_send_quota() if self._use_ses_v2 else self._get_v1_send_quota()
+                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django_ses/__init__.py", line 338, in _get_v1_send_quota
+    quota_dict = self.connection.get_send_quota()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/client.py", line 570, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/context.py", line 124, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/client.py", line 1013, in _make_api_call
+    http, parsed_response = self._make_request(
+                            ^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/client.py", line 1037, in _make_request
+    return self._endpoint.make_request(operation_model, request_dict)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/endpoint.py", line 119, in make_request
+    return self._send_request(request_dict, operation_model)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/endpoint.py", line 196, in _send_request
+    request = self.create_request(request_dict, operation_model)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/endpoint.py", line 132, in create_request
+    self._event_emitter.emit(
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/hooks.py", line 412, in emit
+    return self._emitter.emit(aliased_event_name, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/hooks.py", line 256, in emit
+    return self._emit(event_name, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/hooks.py", line 239, in _emit
+    response = handler(**kwargs)
+               ^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/signers.py", line 106, in handler
+    return self.sign(operation_name, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/signers.py", line 198, in sign
+    auth.add_auth(request)
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/auth.py", line 424, in add_auth
+    raise NoCredentialsError()
+botocore.exceptions.NoCredentialsError: Unable to locate credentials
+Internal Server Error: /admin/projects/project/1/change/
+Traceback (most recent call last):
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 719, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 1987, in change_view
+    return self.changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 1843, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 1894, in _changeform_view
+    self.save_model(request, new_object, form, not add)
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/projects/admin.py", line 79, in save_model
+    super().save_model(request, obj, form, change)
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 1314, in save_model
+    obj.save()
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 1132, in _save_table
+    (getattr(self, f.attname) if raw else f.pre_save(self, False)),
+                                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/cloudinary/models.py", line 112, in pre_save
+    instance_value = uploader.upload_resource(value, **options)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/cloudinary/uploader.py", line 252, in upload_resource
+    result = upload_func(file, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/cloudinary/uploader.py", line 197, in upload
+    return call_cacheable_api("upload", params, file=file, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/cloudinary/uploader.py", line 833, in call_cacheable_api
+    result = call_api(action, params, http_headers, return_error, unsigned, file, timeout, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/cloudinary/uploader.py", line 921, in call_api
+    raise Error(result["error"]["message"])
+cloudinary.exceptions.Error: Invalid image file

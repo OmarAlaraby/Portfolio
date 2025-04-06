@@ -107,3 +107,70 @@ Traceback (most recent call last):
   File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/botocore/auth.py", line 424, in add_auth
     raise NoCredentialsError()
 botocore.exceptions.NoCredentialsError: Unable to locate credentials
+Internal Server Error: /admin/projects/project/1/change/
+Traceback (most recent call last):
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 719, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 1987, in change_view
+    return self.changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 1843, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 1894, in _changeform_view
+    self.save_model(request, new_object, form, not add)
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/projects/admin.py", line 79, in save_model
+    super().save_model(request, obj, form, change)
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/contrib/admin/options.py", line 1314, in save_model
+    obj.save()
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 1132, in _save_table
+    (getattr(self, f.attname) if raw else f.pre_save(self, False)),
+                                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/cloudinary/models.py", line 112, in pre_save
+    instance_value = uploader.upload_resource(value, **options)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/cloudinary/uploader.py", line 252, in upload_resource
+    result = upload_func(file, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/cloudinary/uploader.py", line 197, in upload
+    return call_cacheable_api("upload", params, file=file, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/cloudinary/uploader.py", line 833, in call_cacheable_api
+    result = call_api(action, params, http_headers, return_error, unsigned, file, timeout, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/omar-alaraby/Desktop/Projects/Portfolio/.venv/lib/python3.12/site-packages/cloudinary/uploader.py", line 921, in call_api
+    raise Error(result["error"]["message"])
+cloudinary.exceptions.Error: Invalid image file

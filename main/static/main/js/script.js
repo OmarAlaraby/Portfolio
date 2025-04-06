@@ -161,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const prevBtn = document.querySelector('.carousel-prev');
         const nextBtn = document.querySelector('.carousel-next');
         const indicators = document.querySelector('.carousel-indicators');
+        const isMobile = window.innerWidth <= 768;
         
         let currentIndex = 0;
         const cardCount = cards.length;
@@ -184,21 +185,46 @@ document.addEventListener('DOMContentLoaded', function() {
         if (prevBtn) prevBtn.addEventListener('click', previousCard);
         if (nextBtn) nextBtn.addEventListener('click', nextCard);
         
-        // Touch/swipe support
+        // Enhanced Touch/swipe support with better thresholds for mobile
         let touchStartX = 0;
         let touchEndX = 0;
+        let touchStartY = 0;
+        let touchEndY = 0;
+        let isScrolling = false;
         
         carousel.addEventListener('touchstart', e => {
             touchStartX = e.changedTouches[0].screenX;
-        });
+            touchStartY = e.changedTouches[0].screenY;
+            isScrolling = false;
+        }, { passive: true });
+        
+        carousel.addEventListener('touchmove', e => {
+            // Detect vertical scrolling to prevent carousel from changing during page scroll
+            if (!isScrolling) {
+                touchEndY = e.changedTouches[0].screenY;
+                isScrolling = Math.abs(touchEndY - touchStartY) > 30;
+            }
+        }, { passive: true });
         
         carousel.addEventListener('touchend', e => {
+            if (isScrolling) return; // Skip if user was trying to scroll the page
+            
             touchEndX = e.changedTouches[0].screenX;
-            if (touchStartX - touchEndX > 50) {
-                nextCard();
-            } else if (touchEndX - touchStartX > 50) {
-                previousCard();
+            const swipeDistance = touchStartX - touchEndX;
+            const swipeThreshold = isMobile ? 30 : 50; // More sensitive on mobile
+            
+            if (Math.abs(swipeDistance) > swipeThreshold) {
+                if (swipeDistance > 0) {
+                    nextCard();
+                } else {
+                    previousCard();
+                }
             }
+        }, { passive: true });
+        
+        // Add resize event listener to adjust carousel for different screen sizes
+        window.addEventListener('resize', () => {
+            updateCarousel();
         });
         
         // Keyboard navigation
@@ -229,6 +255,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         function updateCarousel() {
+            // Check if mobile view
+            const isMobile = window.innerWidth <= 768;
+            
+            // First, pause all videos and remove video-playing class
+            cards.forEach(card => {
+                const video = card.querySelector('video');
+                if (video) {
+                    video.pause();
+                }
+            });
+            
             // Update cards
             cards.forEach((card, index) => {
                 // Calculate position (-2, -1, 0, 1, 2)
@@ -249,6 +286,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (cardPosition === 0) card.classList.add('center');
                 else if (cardPosition < 0) card.classList.add('left');
                 else card.classList.add('right');
+                
+                // Handle videos - only play video in center card
+                const video = card.querySelector('video');
+                if (video) {
+                    if (cardPosition === 0) {
+                        // Reset video to start and play
+                        video.currentTime = 0;
+                        video.play().catch(err => console.log('Video play failed:', err));
+                        
+                        // Make sure overlay hover effect still works for center card
+                        const projectImage = video.closest('.project-image');
+                        if (projectImage) {
+                            const overlay = projectImage.querySelector('.project-overlay');
+                            if (overlay) {
+                                // Add hover event listeners for overlay
+                                overlay.addEventListener('mouseenter', function() {
+                                    video.pause();
+                                });
+                                
+                                overlay.addEventListener('mouseleave', function() {
+                                    video.play().catch(err => {});
+                                });
+                            }
+                        }
+                    }
+                }
             });
             
             // Update indicators
@@ -418,8 +481,70 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Function to toggle fullscreen for videos
+    function toggleFullscreen(videoId) {
+        const video = document.getElementById(videoId);
+        if (!video) return;
+        
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        } else if (video.webkitRequestFullscreen) { /* Safari */
+            video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) { /* IE11 */
+            video.msRequestFullscreen();
+        }
+        
+        // Add class to parent card to prevent animations
+        const card = video.closest('.project-card');
+        if (card) {
+            card.classList.add('video-playing');
+        }
+    }
+
+    // Handle video interactions for project cards
+    function setupVideoHandlers() {
+        // Find all project cards with videos
+        const videoContainers = document.querySelectorAll('.project-card .video-container');
+        
+        videoContainers.forEach(container => {
+            const video = container.querySelector('video');
+            const card = container.closest('.project-card');
+            const projectImage = container.closest('.project-image');
+            const overlay = projectImage.querySelector('.project-overlay');
+            
+            if (!video || !card) return;
+            
+            // Set up autoplay and loop
+            video.autoplay = false; // Don't autoplay initially
+            video.muted = true; // Required for autoplay in most browsers
+            video.loop = true;
+            video.controls = false; // Remove video controls
+            video.setAttribute('playsinline', ''); // For iOS
+            
+            // Only play videos in center cards initially
+            if (card.getAttribute('data-position') === '0') {
+                video.play().catch(err => console.log('Autoplay failed:', err));
+            }
+            
+            // Pause video when overlay is being hovered to prevent click conflicts
+            if (overlay) {
+                overlay.addEventListener('mouseenter', function() {
+                    video.pause();
+                });
+                
+                overlay.addEventListener('mouseleave', function() {
+                    // Only resume playing if it's the center card
+                    if (card.getAttribute('data-position') === '0') {
+                        video.play().catch(err => {});
+                    }
+                });
+            }
+        });
+    }
+
     // Initialize all enhanced effects
     setupTiltEffect();
     setupStarParticles();
     enhanceSectionTitles();
+    setupVideoHandlers();
 }); 

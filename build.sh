@@ -12,7 +12,4 @@ poetry lock --no-update
 # Install dependencies
 poetry install --no-interaction --no-ansi
 
-# Ensure Gunicorn is installed
-poetry add gunicorn
-
 echo "Build completed successfully"

@@ -32,9 +32,10 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'omar-alaraby-portfolio.onrender.com',
-    '127.0.0.1', 
-    'localhost' 
+    "omar-alaraby-portfolio.onrender.com", 
+    "0.0.0.0",
+    "localhost",
+    "127.0.0.1",
 ]
 
 

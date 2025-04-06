@@ -1,4 +1,3 @@
-#!/bin/bash
 set -e
 
 # Production environment settings
@@ -35,3 +34,4 @@ exec poetry run gunicorn \
     --access-logfile - \
     --error-logfile - \
     portfolio.wsgi:application
+

@@ -12,7 +12,7 @@ poetry lock --no-update
 # Install dependencies
 poetry install --no-interaction --no-ansi
 
-# Ensure Gunicorn is installed
-poetry add gunicorn
+# Ensure Gunicorn and python-dotenv are installed
+poetry add gunicorn python-dotenv
 
 echo "Build completed successfully"

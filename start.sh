@@ -1,23 +1,37 @@
 #!/bin/bash
 set -e
 
-# Set environment variables
+# Production environment settings
 export DEBUG=False
+export PYTHONUNBUFFERED=1
 
-# Directory setup
+# Create required directories
 mkdir -p staticfiles media
 chmod -R 755 staticfiles media
 
-# Poetry installation
-if [ -f "pyproject.toml" ]; then
-    pip install poetry
-    poetry lock --no-update  # Add this line
-    poetry install --no-interaction --no-ansi --no-root
+# Verify Poetry is installed
+if ! command -v poetry &> /dev/null; then
+    echo "Poetry not found. Please run build.sh first."
+    exit 1
 fi
 
-# Django commands
-python manage.py collectstatic --noinput --clear
-python manage.py migrate
+# Apply database migrations
+echo "Applying database migrations..."
+poetry run python manage.py migrate
+
+# Collect static files
+echo "Collecting static files..."
+poetry run python manage.py collectstatic --noinput --clear
+
+# Install Gunicorn if needed
+poetry add gunicorn &> /dev/null || true
 
 # Start Gunicorn
-gunicorn --workers=3 portfolio.wsgi:application 
+echo "Starting Gunicorn server..."
+exec poetry run gunicorn \
+    --bind 0.0.0.0:${PORT:-8000} \
+    --workers 3 \
+    --timeout 120 \
+    --access-logfile - \
+    --error-logfile - \
+    portfolio.wsgi:application

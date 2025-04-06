@@ -1,28 +1,22 @@
 set -e
 
-# Set environment variables for production
+# Set environment variables
 export DEBUG=False
 
-# Make sure directories exist with proper permissions
-mkdir -p staticfiles
-mkdir -p media
-chmod -R 755 staticfiles
-chmod -R 755 media
+# Directory setup
+mkdir -p staticfiles media
+chmod -R 755 staticfiles media
 
-# Install dependencies (replace poetry with pip if needed)
+# Poetry installation
 if [ -f "pyproject.toml" ]; then
     pip install poetry
-    poetry install --no-interaction --no-ansi
+    poetry lock --no-update  # Add this line
+    poetry install --no-interaction --no-ansi --no-root
 fi
 
-# Collect static files
-echo "Collecting static files..."
+# Django commands
 python manage.py collectstatic --noinput --clear
-
-# Apply database migrations
-echo "Applying database migrations..."
 python manage.py migrate
 
 # Start Gunicorn
-echo "Starting Gunicorn server..."
-gunicorn --workers=3 portfolio.wsgi:application --bind 0.0.0.0:$PORT
+gunicorn --workers=3 portfolio.wsgi:application 

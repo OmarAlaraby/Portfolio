@@ -13,7 +13,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
     <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="dark-theme">
     <!-- Particles Background -->
@@ -93,7 +93,7 @@
         </div>
     </section>
 
-    <!-- Projects Section - Now appears first -->
+    <!-- Projects Section -->
     <section id="projects" class="projects-section">
         <div class="container">
             <h2 class="section-title">Projects</h2>
@@ -110,15 +110,17 @@
                     {% for project in projects %}
                     <div class="project-card" data-position="{{ forloop.counter0 }}">
                         <div class="project-image">
-                            {% if project.video %}
-                            <div class="video-container">
-                                <video autoplay muted loop playsinline>
-                                    <source src="{{ project.video.url }}" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                            {% elif project.image %}
-                            <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy">
+                            {% if project.image %}
+                                {% if project.image.resource_type == 'video' %}
+                                <div class="video-container">
+                                    <video autoplay muted loop playsinline>
+                                        <source src="{{ project.image.url }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                {% else %}
+                                <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy">
+                                {% endif %}
                             {% endif %}
                             <div class="project-overlay">
                                 <div class="project-links">
@@ -127,8 +129,8 @@
                                         <i class="fab fa-github"></i>
                                     </a>
                                     {% endif %}
-                                    {% if project.live_url %}
-                                    <a href="{{ project.live_url }}" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Live Demo">
+                                    {% if project.url %}
+                                    <a href="{{ project.url }}" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Live Demo">
                                         <i class="fas fa-external-link-alt"></i>
                                     </a>
                                     {% endif %}
@@ -500,23 +502,13 @@
                         </a>
                         {% endif %}
                         
-                        {% if contact_info and contact_info.twitter %}
-                        <a href="{{ contact_info.twitter }}" target="_blank" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        {% else %}
-                        <a href="https://twitter.com/" target="_blank" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        {% endif %}
-                        
                         {% if contact_info and contact_info.leetcode %}
                         <a href="{{ contact_info.leetcode }}" target="_blank" class="social-link">
-                            <i class="fab fa-leetcode"></i>
+                            <img src="{% static 'main/images/leetcode.svg' %}" alt="LeetCode" class="leetcode-icon">
                         </a>
                         {% else %}
                         <a href="https://leetcode.com/" target="_blank" class="social-link">
-                            <i class="fab fa-leetcode"></i>
+                            <img src="{% static 'main/images/leetcode.svg' %}" alt="LeetCode" class="leetcode-icon">
                         </a>
                         {% endif %}
                     </div>

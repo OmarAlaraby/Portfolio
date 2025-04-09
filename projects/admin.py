@@ -9,33 +9,37 @@ import re
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('title', 'order', 'media_type', 'display_media')
-    list_editable = ('order',)
-    list_filter = ('media_type',)
+    list_display = ('title', 'technologies', 'order', 'featured', 'created_at', 'display_media')
+    list_filter = ('featured', 'created_at')
     search_fields = ('title', 'description', 'technologies')
+    list_editable = ('order', 'featured')
     readonly_fields = ('display_media',)
-    
     fieldsets = (
         (None, {
-            'fields': ('title', 'description', 'technologies', 'order')
+            'fields': ('title', 'description', 'technologies', 'image', 'url', 'github_url')
         }),
-        ('Media', {
-            'fields': ('media_type', ('image', 'video', 'display_media')),
-            'description': 'Choose either an image or video upload for this project'
+        ('Display Options', {
+            'fields': ('order', 'featured'),
+            'classes': ('collapse',)
         }),
-        ('URLs', {
-            'fields': ('github_url', 'live_url', 'api_docs_url'),
-            'classes': ('collapse',),
-            'description': 'Project links for GitHub, live site, and API documentation'
+        ('Media Preview', {
+            'fields': ('display_media',),
+            'description': 'Preview of uploaded media (images, GIFs, or MP4 videos)',
+            'classes': ('collapse',)
         }),
     )
     
     def display_media(self, obj):
-        if obj.media_type == 'image' and obj.image:
-            return format_html('<img src="{}" width="150" height="auto" />', obj.image.url)
-        elif obj.media_type == 'video' and obj.video:
-            return format_html('<video width="200" height="113" controls><source src="{}" type="video/mp4">Your browser does not support the video tag.</video>', obj.video.url)
-        return "No media"
+        if obj.image:
+            # Check if it's a video
+            if obj.image.resource_type == 'video':
+                return format_html(
+                    '<video width="320" height="240" controls><source src="{}" type="video/mp4">Your browser does not support the video tag.</video>',
+                    obj.image.url
+                )
+            # It's an image or GIF
+            return format_html('<img src="{}" width="320" height="auto" />', obj.image.url)
+        return "No media uploaded"
     display_media.short_description = 'Media Preview'
     
     def get_youtube_or_vimeo_id(self, url):
@@ -53,52 +57,5 @@ class ProjectAdmin(admin.ModelAdmin):
             
         # Return the full URL if we can't extract an ID
         return url
-    
-    def save_model(self, request, obj, form, change):
-        if form.is_valid():
-            # Only process images if we're using the image media type and there's a new image
-            if obj.media_type == 'image' and 'image' in form.changed_data:
-                image = request.FILES.get('image')
-                if image and hasattr(image, 'content_type') and image.content_type.startswith('image'):
-                    # Skip optimization for GIFs to preserve animation
-                    if image.content_type == 'image/gif':
-                        # Just pass through GIF files without modification
-                        pass
-                    # Only process if it's larger than 500KB and not a GIF
-                    elif image.size > 500 * 1024:  # 500KB
-                        try:
-                            # Open the uploaded image
-                            img = Image.open(image)
-                            
-                            # Calculate new dimensions maintaining aspect ratio
-                            max_width = 1200
-                            if img.width > max_width:
-                                ratio = max_width / img.width
-                                new_width = max_width
-                                new_height = int(img.height * ratio)
-                                img = img.resize((new_width, new_height), Image.LANCZOS)
-                            
-                            # Convert to optimized format
-                            output = io.BytesIO()
-                            
-                            # Save as JPEG with 85% quality
-                            if img.mode != 'RGB':
-                                img = img.convert('RGB')
-                            img.save(output, format='JPEG', quality=85, optimize=True)
-                            output.seek(0)
-                            
-                            # Replace the image in the form
-                            obj.image = InMemoryUploadedFile(
-                                output,
-                                'ImageField',
-                                f"{image.name.split('.')[0]}.jpg",
-                                'image/jpeg',
-                                sys.getsizeof(output),
-                                None
-                            )
-                        except Exception as e:
-                            # If there's an error, just use the original image
-                            print(f"Error optimizing image: {e}")
-                            pass
         
         super().save_model(request, obj, form, change)

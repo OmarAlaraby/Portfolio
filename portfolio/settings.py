@@ -192,7 +192,7 @@ if not DEBUG:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Cloudinary settings for media storage
+# Cloudinary configuration
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', ''),
     'API_KEY': os.environ.get('CLOUDINARY_API_KEY', ''),
@@ -200,15 +200,11 @@ CLOUDINARY_STORAGE = {
     'SECURE': True,
     'MEDIA_TAG': 'media',
     'STATIC_TAG': 'static',
-    'INVALID_VIDEO_ERROR_MESSAGE': 'Please upload a valid video file.',
-    'EXCLUDE_DELETE_ORPHANED_MEDIA_PATHS': [],
-    'STATIC_IMAGES_EXTENSIONS': ['jpg', 'jpe', 'jpeg', 'jpc', 'jp2', 'j2k', 'wdp', 'jxr',
-                                 'hdp', 'png', 'gif', 'webp', 'bmp', 'tif', 'tiff', 'ico'],
-    'MAGIC_FILE_PATH': 'magic',
     'PREFIX': 'portfolio',
-    # Performance optimization
-    'QUALITY': 'auto:good',
-    'FETCH_FORMAT': 'auto'
+    # Simple settings - support for images, GIFs, and MP4 videos
+    'RESOURCE_TYPE': 'auto',
+    'VALIDATION_POLICY': None,
+    'ALLOWED_FORMATS': ['jpg', 'jpeg', 'png', 'gif', 'mp4', 'webp'],
 }
 
 # Use Cloudinary for media files storage in production

@@ -905,6 +905,18 @@ body {
     transform: translateY(-3px);
 }
 
+.social-link .leetcode-icon {
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: -0.25em;
+    fill: currentColor;
+    transition: transform 0.3s ease;
+}
+
+.social-link:hover .leetcode-icon {
+    transform: scale(1.1);
+}
+
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -1049,6 +1061,18 @@ body {
 
 .form-message.error {
     background-color: #f44336;
+    color: white;
+    border: none;
+}
+
+.form-message.warning {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+}
+
+.form-message.info {
+    background-color: #2196F3;
     color: white;
     border: none;
 }

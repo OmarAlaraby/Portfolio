@@ -74,11 +74,10 @@
                         <span class="name-space"></span>
                         <span class="typing-name">Omar Alaraby</span>
                     </h1>
-                    <h2 class="intro-subtitle">Backend Engineer & Competitive Programmer</h2>
-                    <p class="intro-description">
-                        A passionate developer with experience in building production-ready applications
-                        and a strong background in competitive programming.
-                    </p>
+                    {% if profile %}
+                        <p class="intro-subtitle">{{ profile.title }}</p>
+                        <p class="intro-description">{{ profile.description }}</p>
+                    {% endif %}
                     <div class="intro-buttons">
                         <a href="#projects" class="btn btn-primary">View My Work</a>
                         <a href="#contact" class="btn btn-outline">Contact Me</a>
@@ -86,7 +85,9 @@
                 </div>
                 <div class="col-lg-6 text-center">
                     <div class="profile-image-container">
-                        <img src="{% static 'main/images/profile_pic.jpg' %}" alt="Omar Alaraby" class="profile-image">
+                        {% if profile %}
+                            <img src="{{ profile.photo.url }}" alt="{{ profile.title }}" class="profile-image">
+                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -1,23 +1,55 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* CSS Variables */
 :root {
     --primary-color: #121212;
-    --secondary-color: #181818;
-    --text-color: #f5f5f5;
+    --secondary-color: #1a1a1a;
     --accent-color: #00ff9d;
     --accent-color-darker: #00cc7d;
+    --text-color: #ffffff;
+    --text-color-muted: #a0a0a0;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --card-bg: rgba(26, 26, 26, 0.8);
+    --card-hover-bg: rgba(26, 26, 26, 0.95);
+    --transition-speed: 0.3s;
+    --border-radius: 15px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
     --gradient-start: #00ff9d;
     --gradient-end: #00c3ff;
     --dark-overlay: rgba(18, 18, 18, 0.85);
-    --card-bg: rgba(26, 26, 26, 0.8);
     --card-border: rgba(0, 255, 157, 0.1);
     --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     --card-hover-shadow: 0 15px 40px rgba(0, 255, 157, 0.25);
 }
 
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
+    font-family: var(--font-body);
     background-color: var(--primary-color);
     color: var(--text-color);
-    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
     padding-top: 70px; /* For fixed navbar */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
 }
 
 /* Updated Navbar Styles */

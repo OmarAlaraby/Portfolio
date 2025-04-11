@@ -1,23 +1,55 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* CSS Variables */
 :root {
     --primary-color: #121212;
-    --secondary-color: #181818;
-    --text-color: #f5f5f5;
+    --secondary-color: #1a1a1a;
     --accent-color: #00ff9d;
     --accent-color-darker: #00cc7d;
+    --text-color: #ffffff;
+    --text-color-muted: #a0a0a0;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --card-bg: rgba(26, 26, 26, 0.8);
+    --card-hover-bg: rgba(26, 26, 26, 0.95);
+    --transition-speed: 0.3s;
+    --border-radius: 15px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
     --gradient-start: #00ff9d;
     --gradient-end: #00c3ff;
     --dark-overlay: rgba(18, 18, 18, 0.85);
-    --card-bg: rgba(26, 26, 26, 0.8);
     --card-border: rgba(0, 255, 157, 0.1);
     --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     --card-hover-shadow: 0 15px 40px rgba(0, 255, 157, 0.25);
 }
 
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
+    font-family: var(--font-body);
     background-color: var(--primary-color);
     color: var(--text-color);
-    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
     padding-top: 70px; /* For fixed navbar */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
 }
 
 /* Updated Navbar Styles */
@@ -84,18 +116,21 @@ body {
     position: relative;
     overflow: hidden;
     transform: translateZ(0);
+    padding: 2rem 0;
 }
 
-.intro-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0 0 L100 100 M100 0 L0 100" stroke="%2300ff9d" stroke-width="0.5" opacity="0.1"/></svg>');
-    opacity: 0.1;
-    z-index: 0;
+.intro-content {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.intro-text {
+    flex: 1;
+    padding-right: 2rem;
 }
 
 .intro-title {
@@ -126,6 +161,7 @@ body {
     animation: typing 1s forwards 1s;
     color: var(--accent-color);
     position: relative;
+    display: inline-block;
 }
 
 .typing-name::after {
@@ -146,17 +182,6 @@ body {
     transform-origin: left;
 }
 
-@keyframes typing {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .intro-subtitle {
     font-size: 2rem;
     margin-bottom: 1.5rem;
@@ -164,15 +189,6 @@ body {
     opacity: 0.9;
     animation: fadeIn 1s forwards 2s;
     opacity: 0;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
 }
 
 .intro-description {
@@ -198,12 +214,16 @@ body {
     border-radius: 30px;
     font-weight: 600;
     transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-primary {
     background-color: var(--accent-color);
-    border: none;
     color: var(--primary-color);
+    border: none;
 }
 
 .btn-primary:hover {
@@ -213,9 +233,9 @@ body {
 }
 
 .btn-outline {
+    background-color: transparent;
     border: 2px solid var(--accent-color);
     color: var(--accent-color);
-    background: transparent;
 }
 
 .btn-outline:hover {
@@ -226,14 +246,13 @@ body {
 }
 
 .profile-image-container {
-    position: relative;
-    width: 350px;
-    height: 350px;
-    margin: 0 auto;
-    border-radius: 50%;
+    flex: 0 0 300px;
+    height: 450px;
+    margin: 0;
+    border-radius: 15px;
     overflow: hidden;
-    border: 4px solid var(--accent-color);
-    box-shadow: 0 0 30px rgba(0, 255, 157, 0.3);
+    border: 2px solid rgba(0, 255, 157, 0.2);
+    box-shadow: 0 0 30px rgba(0, 255, 157, 0.1);
     transition: transform 0.3s ease;
     animation: fadeIn 1s forwards 1.5s;
     opacity: 0;
@@ -243,10 +262,72 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
 }
 
 .profile-image-container:hover {
     transform: scale(1.05);
+}
+
+@keyframes typing {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .intro-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .intro-text {
+        padding-right: 0;
+    }
+
+    .profile-image-container {
+        margin: 0 auto;
+    }
+
+    .intro-description {
+        margin: 0 auto;
+    }
+
+    .intro-buttons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .intro-title {
+        font-size: 2.5rem;
+    }
+
+    .intro-subtitle {
+        font-size: 1.5rem;
+    }
+
+    .profile-image-container {
+        width: 250px;
+        height: 375px;
+    }
 }
 
 /* Section Title Styles */

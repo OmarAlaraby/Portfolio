@@ -4,8 +4,11 @@ from projects.views import get_projects
 from skills.views import get_skills
 from contact.views import get_contact_info
 from contact.forms import ContactForm
-
+from .models import Profile
 # Create your views here.
+
+def get_profile():
+    return Profile.objects.first()
 
 def index(request):
     """
@@ -19,7 +22,7 @@ def index(request):
     skills_data = get_skills()
     contact_info = get_contact_info()
     contact_form = ContactForm()
-    
+    profile = get_profile()
     # Get any messages from Django's message framework
     messages_from_request = messages.get_messages(request)
     
@@ -30,6 +33,7 @@ def index(request):
         'contact_info': contact_info,
         'form': contact_form,
         'messages': messages_from_request,
+        'profile': profile,
     }
     
     return render(request, 'main/index.html', context)

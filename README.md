@@ -2,7 +2,7 @@
 
 A personal portfolio website built with Django to showcase projects, skills, and resume.
 
-View the live portfolio: [omar-alaraby-portfolio.onrender.com](https://omar-alaraby-portfolio.onrender.com)
+View the live portfolio: [https://omaralaraby.tech/](https://omaralaraby.tech/)
 
 ## Development Setup with Poetry
 

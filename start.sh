@@ -12,5 +12,6 @@ exec poetry run gunicorn \
     --workers 3 \
     --timeout 120 \
     --access-logfile - \
+    --forwarded-allow-ips="*" \
     --error-logfile - \
     portfolio.wsgi:application

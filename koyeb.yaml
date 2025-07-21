@@ -1,5 +1,0 @@
-services:
-  - name: my-django-app
-    scaling:
-      min: 0   # Required for free tier
-      max: 1   # Optional (free tier max)
